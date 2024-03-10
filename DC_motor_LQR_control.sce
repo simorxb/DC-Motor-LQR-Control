@@ -36,12 +36,12 @@ config(1).Q = diag([1 0.1 0.01]); //Weights on states
 config(1).R = 0.5; //Weight on input
 
 config(2).Q = diag([1 0.1 0.01]); //Weights on states
-config(2).R = 10; //Weight on input
+config(2).R = 20; //Weight on input
 
-config(3).Q = diag([1 0.5 0.01]); //Weights on states
+config(3).Q = diag([1 0.2 0.01]); //Weights on states
 config(3).R = 0.5; //Weight on input
 
-config(4).Q = diag([1 0.1 0.5]); //Weights on states
+config(4).Q = diag([1 0.1 3]); //Weights on states
 config(4).R = 0.5; //Weight on input
 
 // Try all configurations
@@ -70,8 +70,8 @@ v_marg = 0.1;
 
 show_window(1);
 subplot(411);
-h = plot(out(1).theta_out.time, out(1).theta_out.values, 'b-', out(2).theta_out.time, out(2).theta_out.values, 'g-', out(1).theta_setpoint.time, out(1).theta_setpoint.values, 'r--', 'LineWidth',3);
-l = legend("Feedback - Config 1", "Feedback - Config 2", "Setpoint");
+h = plot(out(1).theta_out.time, out(1).theta_out.values, 'b-', out(2).theta_out.time, out(2).theta_out.values, 'g-', out(3).theta_out.time, out(3).theta_out.values, 'c-', out(4).theta_out.time, out(4).theta_out.values, 'm-', out(1).theta_setpoint.time, out(1).theta_setpoint.values, 'r--', 'LineWidth',3);
+l = legend("Feedback - Config 1", "Feedback - Config 2", "Feedback - Config 3", "Feedback - Config 4", "Setpoint");
 l.font_size = 3;
 ax=gca();
 set(ax, "margins", [0.1, 0.1, v_marg, v_marg]);
@@ -79,21 +79,27 @@ set(ax,"grid",[1 1]);
 ylabel('Angular position [rad]', 'font_style', 'times bold', 'font_size', 3);
 
 subplot(412);
-h = plot(omega_out.time, omega_out.values, 'b-', 'LineWidth',3);
+h = plot(out(1).omega_out.time, out(1).omega_out.values, 'b-', out(2).omega_out.time, out(2).omega_out.values, 'g-', out(3).omega_out.time, out(3).omega_out.values, 'c-', out(4).omega_out.time, out(4).omega_out.values, 'm-', 'LineWidth',3);
+l = legend("Feedback - Config 1", "Feedback - Config 2", "Feedback - Config 3", "Feedback - Config 4");
+l.font_size = 3;
 ax=gca();
 set(ax, "margins", [0.1, 0.1, v_marg, v_marg]);
 set(ax,"grid",[1 1]);
 ylabel('Angular speed [rad/s]', 'font_style', 'times bold', 'font_size', 3);
 
 subplot(413);
-h = plot(current_out.time, current_out.values, 'b-', 'LineWidth',3);
+h = plot(out(1).current_out.time, out(1).current_out.values, 'b-', out(2).current_out.time, out(2).current_out.values, 'g-', out(3).current_out.time, out(3).current_out.values, 'c-', out(4).current_out.time, out(4).current_out.values, 'm-', 'LineWidth',3);
+l = legend("Feedback - Config 1", "Feedback - Config 2", "Feedback - Config 3", "Feedback - Config 4");
+l.font_size = 3;
 ax=gca();
 set(ax, "margins", [0.1, 0.1, v_marg, v_marg]);
 set(ax,"grid",[1 1]);
 ylabel('Current [A]', 'font_style', 'times bold', 'font_size', 3);
 
 subplot(414);
-h = plot(voltage_out.time, voltage_out.values, 'b-', 'LineWidth',3);
+h = plot(out(1).voltage_out.time, out(1).voltage_out.values, 'b-', out(2).voltage_out.time, out(2).voltage_out.values, 'g-', out(3).voltage_out.time, out(3).voltage_out.values, 'c-', out(4).voltage_out.time, out(4).voltage_out.values, 'm-', 'LineWidth',3);
+l = legend("Feedback - Config 1", "Feedback - Config 2", "Feedback - Config 3", "Feedback - Config 4");
+l.font_size = 3;
 ax=gca();
 set(ax, "margins", [0.1, 0.1, v_marg, 0.25]);
 set(ax,"grid",[1 1]);
